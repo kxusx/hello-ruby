@@ -13,7 +13,7 @@ more_movies = [
     :release_date => '16-Apr-1988'},
   {:title => 'Green Book', :rating => 'PG-13',
     :release_date => '16-Nov-2018'},
-  {:title => 'Parasite', :rating => 'R',
+  {:title => 'Paraasite', :rating => 'R',
     :release_date => '30-May-2019'},
   {:title => 'Nomadland', :rating => 'R',
     :release_date => '19-Feb-2021'},
