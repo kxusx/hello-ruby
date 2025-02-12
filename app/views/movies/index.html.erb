@@ -5,12 +5,47 @@
 <h1>Movies</h1>
 
 <div id="movies">
-  <% @movies.each do |movie| %>
-    <%= render movie %>
-    <p>
-      <%= link_to "Show this movie", movie %>
-    </p>
-  <% end %>
+  <table border="1">
+    <thead>
+      <tr>
+        <th 
+          class="<%= 'sorted' if session[:sort] == 'title' %> <%= 'asc' if session[:direction] == 'asc' %> <%= 'desc' if session[:direction] == 'desc' %>">
+          <%= link_to "Title", movies_path(sort: "title", direction: toggle_direction("title")) %>
+          <span class="screen-reader">Sort by Title <%= direction_symbol("title") %></span>
+        </th>
+        <th 
+          class="<%= 'sorted' if session[:sort] == 'rating' %> <%= 'asc' if session[:direction] == 'asc' %> <%= 'desc' if session[:direction] == 'desc' %>">
+          <%= link_to "Rating", movies_path(sort: "rating", direction: toggle_direction("rating")) %>
+          <span class="screen-reader">Sort by Rating <%= direction_symbol("rating") %></span>
+        </th>
+        <th 
+          class="<%= 'sorted' if session[:sort] == 'release_date' %> <%= 'asc' if session[:direction] == 'asc' %> <%= 'desc' if session[:direction] == 'desc' %>">
+          <%= link_to "Release Date", movies_path(sort: "release_date", direction: toggle_direction("release_date")) %>
+          <span class="screen-reader">Sort by Release Date <%= direction_symbol("release_date") %></span>
+        </th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @movies.each do |movie| %>
+        <tr>
+          <td><%= movie.title %></td>
+          <td><%= movie.rating %></td>
+          <td><%= movie.release_date %></td>
+          <td>
+            <%= link_to 'Show', movie_path(movie) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          Total Movies: <%= @movies.count %>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
 </div>
 
 <%= link_to "New movie", new_movie_path %>
